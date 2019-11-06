@@ -2,11 +2,12 @@ package com.sree.parallel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.concurrent.BlockingQueue;
 
 public class Chunk<I> {
     Collection<I> data;
-    String inboundQueueName;
-    String outboundQueueName;
+    BlockingQueue<Chunk<?>> outboundQueue;
+    Processor<I> processor;
 
     public void addItem(I item) {
         if (data == null) {
@@ -37,19 +38,19 @@ public class Chunk<I> {
         this.data = data;
     }
 
-    public void setOutboundQueueName(String outboundQueueName) {
-        this.outboundQueueName = outboundQueueName;
+    public Processor<I> getProcessor() {
+        return processor;
     }
 
-    public String getInboundQueueName() {
-        return inboundQueueName;
+    public void setProcessor(Processor<I> processor) {
+        this.processor = processor;
     }
 
-    public void setInboundQueueName(String inboundQueueName) {
-        this.inboundQueueName = inboundQueueName;
+    public BlockingQueue<Chunk<?>> getOutboundQueue() {
+        return outboundQueue;
     }
 
-    public String getOutboundQueueName() {
-        return outboundQueueName;
+    public void setOutboundQueue(BlockingQueue<Chunk<?>> outboundQueue) {
+        this.outboundQueue = outboundQueue;
     }
 }
